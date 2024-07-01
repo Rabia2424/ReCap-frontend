@@ -1,0 +1,16 @@
+<div style="margin-top: 30px">
+    <table class="container">
+      <thead>
+        <tr>
+          <th><h1>Brand Id</h1></th>
+          <th><h1>Brand Name</h1></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands">
+          <td>{{ brand.brandId }}</td>
+          <td>{{ brand.brandName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
