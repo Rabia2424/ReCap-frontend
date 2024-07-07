@@ -2,15 +2,23 @@
     <table class="container">
       <thead>
         <tr>
-          <th><h1>Brand Id</h1></th>
           <th><h1>Brand Name</h1></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let brand of brands">
-          <td>{{ brand.brandId }}</td>
+        <tr (click)="clearCurrentBrand()"
+         routerLink="/cars" 
+        [class]="getAllBrandClass()">
+          <td>All Cars</td>
+        </tr>
+        <tr (click)="setCurrentBrand(brand)"
+        routerLink="/cars/brand/{{brand.brandId}}"
+         *ngFor="let brand of brands"
+         [class]="getCurrentBrandClass(brand)">
           <td>{{ brand.brandName }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+
+<h5 style="color:#403E10;margin-top: 2%;margin-left:30px;" *ngIf="currentBrand" >{{currentBrand.brandName}} selected!</h5>

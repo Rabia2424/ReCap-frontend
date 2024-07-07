@@ -113,3 +113,8 @@ h2 a {
 .spinner-border{
     color: #403E10;
 }
+
+
+.container tr.active {
+  background-color: #090525;
+}

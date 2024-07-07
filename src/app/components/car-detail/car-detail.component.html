@@ -1,0 +1,30 @@
+<div class="box">
+  <div class="container">
+    <div class="wrapper">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="banner-image">
+            <img [src]="getImage(cardetail)" class="card-img-top" alt="..." />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h1>{{ cardetail.carName }}</h1>
+          <p><i>Brand: </i>{{ cardetail.brandName }}</p>
+          <p><i>Color: </i>{{ cardetail.colorName }}</p>
+          <p><i>Model Year: </i>{{ cardetail.modelYear }}</p>
+          <p><i>Daily Price: </i>{{ cardetail.dailyPrice }}</p>
+          <div class="button-wrapper">
+            <button class="btn outline">DETAILS</button>
+            <button class="btn fill">BUY NOW</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p class="desc">
+          <i>Description</i><br />
+          {{ cardetail.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

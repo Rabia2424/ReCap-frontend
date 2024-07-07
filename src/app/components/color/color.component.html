@@ -2,15 +2,23 @@
     <table class="container">
       <thead>
         <tr>
-          <th><h1>Color Id</h1></th>
           <th><h1>Color Name</h1></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let color of colors">
-          <td>{{ color.colorId }}</td>
+        <tr (click)="clearCurrentColor()"
+        routerLink="/cars"
+        [class]="getAllColorClass()">
+          <td>All Cars</td>
+        </tr>
+        <tr (click)="setCurrentColor(color)"
+        routerLink="/cars/color/{{color.colorId}}"
+        *ngFor="let color of colors"
+        [class]="getCurrentColorClass(color)">
           <td>{{ color.colorName }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+
+<h5 style="color:#403E10;margin-top: 2%;margin-left:30px;" *ngIf="currentColor" >{{currentColor.colorName}} selected!</h5>
