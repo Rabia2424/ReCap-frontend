@@ -6,19 +6,21 @@
       <thead *ngIf="dataLoaded==true">
         <tr>
           <th><h1>Rental Id</h1></th>
-          <th><h1>Brand Name</h1></th>
+          <th><h1>Model Full Name</h1></th>
           <th><h1>Full Name</h1></th>
           <th><h1>Rent Date</h1></th>
           <th><h1>Return Date</h1></th>
+          <th><h1>Daily Price</h1></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let rental of rentals">
-          <td>{{ rental.id }}</td>
-          <td>{{ rental.brandName }}</td>
+          <td>{{ rental.rentalId }}</td>
+          <td>{{ rental.modelFullName}}</td>
           <td>{{ rental.fullName }}</td>
           <td>{{ rental.rentDate }}</td>
           <td>{{ rental.returnDate }}</td>
+          <td>{{ rental.dailyPrice}}</td>
         </tr>
       </tbody>
     </table>

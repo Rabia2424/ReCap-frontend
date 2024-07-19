@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col select-part">
+        <label class="label">Brands</label>
+      <div class="custom-select">
+        <select [(ngModel)]="selectedBrandId">
+          <option *ngFor="let brand of brands" value="{{brand.brandId}}">{{brand.brandName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+        <label class="label">Colors</label>
+      <div class="custom-select custom-select-2">
+        <select [(ngModel)]="selectedColorId">
+          <option *ngFor="let color of colors" value="{{color.colorId}}">{{color.colorName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col button-filter">
+      <button type="submit" [class]="changeButtonClass()" [routerLink]="changeRouteLink()">Filter</button>
+      <button (click)="clearFilter()" type="submit" class="btn btn-custom" routerLink="/cars" >Clear</button>
+    </div>
+  </div>

@@ -1,5 +1,6 @@
 .custom-navbar {
     background-color: transparent; /* Ensure the outermost div doesn't have a background color */
+    display: inline;
 }
 
 .custom-navbar .navbar-nav .nav-link,
@@ -17,14 +18,6 @@
 }
 
 
-.btn-color {
-    background-color: #090525;
-    color: white ; /* Optional: To ensure the text is readable */
-}
-    
-
-
-
 .navbar-nav {
     list-style-type: none; /* Madde işaretlerini kaldırır */
     display: flex;
@@ -32,6 +25,7 @@
 
 .nav li a{
     text-decoration:none ;
+    margin-top:6px;
 }
 
 .hoverable{
@@ -130,12 +124,8 @@
   }
 
 
-  .search-part {
-    margin-left: 160px;
-  }
-
   .container-all{
     margin-top: 30px;
   }
 
-  
+ 

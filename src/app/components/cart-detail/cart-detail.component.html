@@ -1,0 +1,86 @@
+<table style="background-color: transparent;" class="table">
+  <thead>
+    <tr>
+      <th>Images</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Description</th>
+      <th>Total Amount</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cartItem of cartItems">
+      <td>
+        <img
+          *ngIf="cartItem.carDetail.imagePath"
+          [src]="getImage(cartItem.carDetail)[0]"
+          class="car-icon"
+          style="object-fit: cover"
+          width="200"
+          height="100%"
+        />
+
+        <img
+          *ngIf="cartItem.carDetail.imagePath==null"
+          src="getImage(cartItem.carDetail)"
+          class="car-icon"
+          style="object-fit: cover"
+          width="200"
+          height="100%"
+        />
+      </td>
+      <td>{{ cartItem.carDetail.brandName }}</td>
+      <td>{{ cartItem.carDetail.carName }}</td>
+      <td>{{ cartItem.carDetail.description }}</td>
+      <td>{{ cartItem.totalAmount | currency }}</td>
+      <td>
+        <button
+          (click)="removeFromCart(cartItem.carDetail)"
+          type="button"
+          class="btn btn-danger btn-sm"
+        >
+          Remove From Cart</button
+        ><i class="bi bi-trash3-fill"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-bottom:30px" class="card-body">
+  <h5 style="color:white" class="card-title">Cart Summary</h5>
+  <p class="card-text"></p>
+  <ul class="list-group">
+    <li class="list-group-item border border-light">
+      <small>
+        <span class="float-start">Number of rented cars:</span>
+        <span class="float-end"
+          ><strong>{{ cartItems.length }} cars</strong></span
+        >
+      </small>
+    </li>
+    <!-- <li class="list-group-item border border-light">
+            <small>
+                <span class="float-start">Toplam kiralama süresi: </span>
+                <span class="float-end">
+                    <strong>
+                    </strong>
+                </span>
+            </small>
+        </li> -->
+    <li class="list-group-item border border-light">
+      <small>
+        <span class="float-start">Total Payment: </span>
+      </small>
+      <span class="float-end text-danger">
+        <strong>{{ getTotalAmount() |currency }}</strong>
+      </span>
+    </li>
+    <li class="list-group border border-light">
+      <br />
+      <span class="d-flex flex-column float-end">
+        <a routerLink="/cars/payment" class="btn btn-success">Confirm Cart</a>
+      </span>
+    </li>
+  </ul>
+</div>

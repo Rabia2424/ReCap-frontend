@@ -1,25 +1,44 @@
-<div class="container mx-auto mt-4">
-  <div class="row">
-    <div *ngFor="let cardetail of cardetails" class="col-md-4">
-      <div class="card" style="width: 18rem">
-        <img
-          [src]="getImage(cardetail)"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title"><i>Car Name:</i> {{cardetail.carName}}</h5>
-          <h6 class="card-subtitle mb-2 text-light-muted"><i>Brand:</i> {{cardetail.brandName}}</h6>
-          <h6 class="card-subtitle mb-2 text-light-muted"><i>Color:</i> {{cardetail.colorName}}</h6>
-          <p class="card-text">
-            <i>Daily Price: </i>{{cardetail.dailyPrice}}
-          </p>
-          <a href="#" class="btn" style="margin-right:10px"
-            ><i class="fas fa-link"></i> Visit Rent</a
-          >
-          <a routerLink="/cardetails/{{cardetail.carId}}" class="btn"><i class="fab fa-github"></i> Details</a>
+<div class="row">
+  <div class="col-md-3">
+    <app-brand></app-brand>
+    <app-color></app-color>
+    <app-customer></app-customer>
+  </div>
+  <div class="col-md-9">
+    <div class="container mt-4">
+      <div class="d-flex search-part" role="search">
+        <input [(ngModel)]="filterText" class="form-control me-2 search-area" type="search" placeholder="Search by car name, brand name, color name or model year." aria-label="Search">
+        <!-- <button (click)="onSearch()" class="btn btn-custom" type="submit">Search</button> -->
+      </div>
+    </div>
+    <app-car-filter></app-car-filter>
+    <div class="container mx-auto mt-4">
+      <div class="row">
+        <div *ngFor="let cardetail of cardetails | filter:filterText" class="col-md-4">
+          <div class="card" style="width: 18rem">
+            <img
+              [src]="getImage(cardetail)"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title"><i>Car Name:</i> {{cardetail.carName}}</h5>
+              <h6 class="card-subtitle mb-2 text-light-muted"><i>Brand:</i> {{cardetail.brandName}}</h6>
+              <h6 class="card-subtitle mb-2 text-light-muted"><i>Color:</i> {{cardetail.colorName}}</h6>
+              <p class="card-text">
+                <i>Daily Price: </i>{{cardetail.dailyPrice}}
+              </p>
+              <a class="btn btn-custom" style="margin-right:10px"
+                ><i class="fas fa-link"></i> Visit Rent</a
+              >
+              <button (click)="setCurrentCarDetail(cardetail)" routerLink="/cardetails/{{cardetail.carId}}" class="btn btn-custom"> Details</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <app-rental></app-rental>
   </div>
-</div>
+
+
+

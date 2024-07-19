@@ -6,11 +6,32 @@ import { CarService } from '../../services/car.service';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from '../../models/car';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from '../../pipes/filter.pipe';
+import { CarFilterComponent } from '../car-filter/car-filter.component';
+import { BrandComponent } from '../brand/brand.component';
+import { ColorComponent } from '../color/color.component';
+import { CustomerComponent } from '../customer/customer.component';
+import { RentalComponent } from '../rental/rental.component';
+
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, 
+    HttpClientModule, 
+    RouterModule,
+    BrandComponent,
+    ColorComponent,
+    CustomerComponent,
+    RentalComponent,
+    FormsModule,
+    FilterPipe,
+    CarFilterComponent,
+   ],
+    providers: [FilterPipe],
   templateUrl: './car.component.html',
   styleUrl: './car.component.css',
 })
@@ -19,6 +40,11 @@ export class CarComponent implements OnInit {
   cardetails: CarDetail[] = [];
   dataLoaded = false;
   imageBaseUrl="https://localhost:44392/";
+  currentCarDetail:CarDetail;
+
+  filterText="";
+  //filteredCarDetails:CarDetail[]=[];
+ 
 
   // carResponseModel: CarResponseModel = {
   //   data:this.cars,
@@ -28,8 +54,9 @@ export class CarComponent implements OnInit {
 
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
+    private filterPipe:FilterPipe) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -48,6 +75,7 @@ export class CarComponent implements OnInit {
   getCars() {
     this.carService.getCars().subscribe((response) => {
       this.cardetails = response.data;
+      //this.filteredCarDetails = response.data;
       this.dataLoaded = true;
     });
   }
@@ -82,4 +110,13 @@ export class CarComponent implements OnInit {
       return this.imageBaseUrl + "/Uploads/Images/DefaultImage.jpg";
     }
   }
+
+  setCurrentCarDetail(cardetail:CarDetail){
+    this.currentCarDetail = cardetail;
+    this.toastrService.info("You redirect to car detail page.","")
+  }
+
+  // onSearch():void{
+  //   this.filteredCarDetails = this.filterPipe.transform(this.cardetails,this.filterText);
+  // }
 }

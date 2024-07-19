@@ -1,0 +1,5 @@
+.nav-item .dropdown-item:focus,
+.nav-item .dropdown-item:hover,
+.nav-item .dropdown-item:active{
+    background-color: rgba(0, 212, 255, 0.9);
+}

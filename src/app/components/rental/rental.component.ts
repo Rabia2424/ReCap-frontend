@@ -26,20 +26,19 @@ export class RentalComponent implements OnInit{
   getRentals(){
     this.rentalService.getRentals()
     .subscribe(response=>{
-      if(response.data)
-      this.rentals = response.data.map((rental:Rental) => this.transformRentalDates(rental));
+      this.rentals = response.data;
       this.dataLoaded=true;
     });
   }
 
   
-  private transformRentalDates(rental: Rental): Rental {
-    return {
-      ...rental,
-      rentDate: moment(rental.rentDate).format('MMMM Do YYYY'),
-      returnDate: rental.returnDate? moment(rental.returnDate).format('MMMM Do YYYY') : 'Car is not returned!'
-    };
-  }
+  // private transformRentalDates(rental: Rental): Rental {
+  //   return {
+  //     ...rental,
+  //     rentDate: moment(rental.rentDate).format('MMMM Do YYYY'),
+  //     returnDate: rental.returnDate? moment(rental.returnDate).format('MMMM Do YYYY') : 'Car is not returned!'
+  //   };
+  // }
 
 }
 
