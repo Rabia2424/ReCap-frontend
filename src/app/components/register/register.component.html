@@ -1,0 +1,48 @@
+
+<a href="https://front.codes/" class="logo" target="_blank">
+
+</a>
+
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h5 class="mb-0 pb-3"><span>Sign Up</span></h5>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                          <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <form [formGroup]="registerForm">
+                                        <h4 class="mb-4 pb-3">Sign Up</h4>
+                                        <div class="form-group">
+                                            <input formControlName="firstName" type="text" name="logname" class="form-style" placeholder="Your First Name" id="logname" autocomplete="off">
+                                            <i class="input-icon uil uil-user"></i>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input formControlName="lastName" type="text" name="logname" class="form-style" placeholder="Your Last Name" id="logname" autocomplete="off">
+                                            <i class="input-icon uil uil-user"></i>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input formControlName="email" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                                            <i class="input-icon uil uil-at"></i>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input formControlName="password" type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                                            <i class="input-icon uil uil-lock-alt"></i>
+                                        </div>
+                                        <a routerLink="/cars/login" (click)="register()" class="btn mt-4">submit</a>
+                                      </form>
+                                      </div>
+                                  </div>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+</div>
+
+

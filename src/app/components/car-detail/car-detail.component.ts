@@ -43,6 +43,8 @@ export class CarDetailComponent implements OnInit {
   imageBaseUrl = 'https://localhost:44392/';
   rentalMessage: string = '';
 
+  rentals:Rental[]=[];
+
   constructor(
     private cardetailService: CarDetailService,
     private carService: CarService,
@@ -59,6 +61,7 @@ export class CarDetailComponent implements OnInit {
         this.getCheckRentalCarId(params['carId']);
       }
     });
+    this.rentals = this.rentalService.getRental() || [];
   }
 
   getCarDetails(carId: number) {
@@ -72,7 +75,7 @@ export class CarDetailComponent implements OnInit {
     if (cardetail.imagePath && cardetail.imagePath.length > 0) {
       return cardetail.imagePath.map((path) => this.imageBaseUrl + path);
     } else {
-      return [this.imageBaseUrl + '/Uploads/Images/DefaultImage.jpg'];
+      return [this.imageBaseUrl + 'Uploads/Images/DefaultImage.jpg'];
     }
   }
 
@@ -107,21 +110,32 @@ export class CarDetailComponent implements OnInit {
       returnDate: this.returnDate,
       customerId: 1,
       modelFullName: '',
-      fullName: '',
-      dailyPrice: 0,
+      fullName: cardetail.brandName + " " + cardetail.carName,
+      dailyPrice: cardetail.dailyPrice,
       rentalId: 0
     }
-   this.rentalService.checkRental(rental).pipe(
-    catchError(error => of({ message: error.error?.message ?? 'An unknown error occurred.' }))
-   ).subscribe(response=>{
-    const checkRentalResponse = response as { success: boolean; message: string }
-    if(checkRentalResponse.success){
-      this.cartService.addToCart(cardetail);
-      this.toastrService.info(checkRentalResponse.message);
+
+    if(rental.rentDate && rental.returnDate){
+      this.rentalService.checkRental(rental).pipe(
+        catchError(error => of({ message: error.error?.message ?? 'An unknown error occurred.' }))
+       ).subscribe(response=>{
+        const checkRentalResponse = response as { success: boolean; message: string }
+        if(checkRentalResponse.success){
+
+          this.rentals = [...this.rentals, rental];
+          console.log(this.rentals);
+        if(this.rentals && this.rentals.length>0){
+          this.rentalService.setRental(this.rentals);
+        }
+          this.cartService.addToCart(cardetail);
+          this.toastrService.info(checkRentalResponse.message);
+        }else{
+          this.toastrService.error(checkRentalResponse.message);
+        }
+       })
     }else{
-      this.toastrService.error(checkRentalResponse.message);
+      this.toastrService.error("Rent date and return date required field");
     }
-   })
   }
 
   // checkRental(rental:Rental){

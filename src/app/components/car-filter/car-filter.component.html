@@ -2,7 +2,7 @@
     <div class="col select-part">
         <label class="label">Brands</label>
       <div class="custom-select">
-        <select [(ngModel)]="selectedBrandId">
+        <select [(ngModel)]="selectedBrandId" aria-label="Select a brand">
           <option *ngFor="let brand of brands" value="{{brand.brandId}}">{{brand.brandName}}</option>
         </select>
       </div>
@@ -10,7 +10,7 @@
     <div class="col">
         <label class="label">Colors</label>
       <div class="custom-select custom-select-2">
-        <select [(ngModel)]="selectedColorId">
+        <select [(ngModel)]="selectedColorId" aria-label="Select a color">
           <option *ngFor="let color of colors" value="{{color.colorId}}">{{color.colorName}}</option>
         </select>
       </div>

@@ -1,44 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from '../../services/payment.service';
-import { FormBuilder, FormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RentalService } from '../../services/rental.service';
 import { Rental } from '../../models/rental';
 import { Payment } from '../../models/payment';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './payment.component.html',
-  styleUrl: './payment.component.css'
+  styleUrl: './payment.component.css',
 })
-export class PaymentComponent implements OnInit{
-  payFormGroup: any;
+export class PaymentComponent implements OnInit {
+  payFormGroup: FormGroup = new FormGroup({});
 
-  fullName:string;
-  cardNumber:string;
-  expiry:Date;
-  cvv:string;
-
-  constructor(private paymentService:PaymentService,
-    private toastrService:ToastrService,
-    private formBuilder:FormBuilder,
-    private rentService:RentalService,
-   ){};
+  constructor(
+    private paymentService: PaymentService,
+    private toastrService: ToastrService,
+    private formBuilder: FormBuilder,
+    private rentalService: RentalService
+  ) {}
 
   ngOnInit(): void {
-    
+    this.createPayFormGroup();
   }
 
-  // createPayFormGroup(){
-  //   this.payFormGroup = this.formBuilder.group({
-  //     fullName: ["", Validators.required],
-  //     cardNumber: ['', Validators.required],
-  //     expiry: ['', Validators.required],
-  //     cvv: ['', Validators.required]
-  //   })
-  // }
+  createPayFormGroup() {
+    this.payFormGroup = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+      cardType: ['', Validators.required],
+      expiry: ['', Validators.required],
+      cvv: ['', Validators.required],
+    });
+  }
 
   // pay(){
   //   if (this.payFormGroup.valid) {
@@ -54,13 +59,34 @@ export class PaymentComponent implements OnInit{
   //     this.askForSave(payment);
   //     this.rentService.payAndRent(payment, rent)
 
-
   //   }else this.toastrService.error(FormIsMissing)
   // }
 
-
-  pay(){
- 
+  pay() {
+    if (this.payFormGroup.valid) {
+      let payment = Object.assign({}, this.payFormGroup.value);
+      console.log(payment);
+      this.paymentService.pay(payment).subscribe((response) => {
+        if (response.success) {
+          this.toastrService.success(response.message);
+          let rentals = this.rentalService.getRental();
+          console.log(rentals);
+          rentals?.forEach((rental) => {
+            if (rental && rental.rentDate && rental.returnDate) {
+              this.rentalService.add(rental).subscribe((response) => {
+                if (response.success) {
+                  this.toastrService.success(response.message);
+                }
+              });
+            } else {
+              this.toastrService.error('There is no rent and return date');
+            }
+          });
+        } else {
+          this.toastrService.error(response.message);
+        }
+      });
+    }
   }
 
   // askForSave(payment:Payment){
@@ -68,7 +94,4 @@ export class PaymentComponent implements OnInit{
   //     if (confirm(SaveYourCreditCard)) this.paymentService.add(payment)
   //   })
   // }
-
 }
-  
-

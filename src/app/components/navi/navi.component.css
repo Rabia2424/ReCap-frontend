@@ -10,6 +10,14 @@
     color: white !important; /* Set the text color to white */
 }
 
+.nav-item .dropdown-item{
+    background-color: rgba(0, 212, 255, 0.9);
+}
+
+.dropdown-menu{
+  background-color: black;
+}
+
 .custom-navbar .navbar-nav .nav-link:hover,
 .custom-navbar .navbar-brand:hover,
 .custom-navbar .dropdown-item:hover,
@@ -41,7 +49,7 @@
     transition-duration: .3s;
     transition-property:transform;
   }
-  
+
   .hoverable:before{
     position:absolute;
     pointer-events: none;
@@ -58,7 +66,7 @@
     transition-duration: 0.3s;
     transition-property: transform, opacity;
   }
-  
+
   .hoverable:hover, .hoverable:active, .hoverable:focus{
     transform: translateY(-5px);
   }
@@ -66,46 +74,46 @@
     opacity: 1;
     transform: translateY(-5px);
   }
-  
-  
-  
+
+
+
   @keyframes bounce-animation {
     16.65% {
       -webkit-transform: translateY(8px);
       transform: translateY(8px);
     }
-  
+
     33.3% {
       -webkit-transform: translateY(-6px);
       transform: translateY(-6px);
     }
-  
+
     49.95% {
       -webkit-transform: translateY(4px);
       transform: translateY(4px);
     }
-  
+
     66.6% {
       -webkit-transform: translateY(-2px);
       transform: translateY(-2px);
     }
-  
+
     83.25% {
       -webkit-transform: translateY(1px);
       transform: translateY(1px);
     }
-  
+
     100% {
       -webkit-transform: translateY(0);
       transform: translateY(0);
     }
   }
-  
+
   .bounce {
     animation-name: bounce-animation;
     animation-duration: 2s;
   }
-  
+
 
   nav {
     background: none !important;
@@ -118,7 +126,7 @@
       }
     }
   }
-  
+
   .page-title {
     opacity: .75 !important;
   }
@@ -128,4 +136,4 @@
     margin-top: 30px;
   }
 
- 
+

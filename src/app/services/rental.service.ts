@@ -12,6 +12,16 @@ import { Response } from 'express';
 })
 export class RentalService {
 
+  private rentals:Rental[]|null = [];
+
+  setRental(rentals:Rental[]){
+    this.rentals = rentals;
+  }
+
+  getRental():Rental[]|null{
+    return this.rentals;
+  }
+
   apiUrl="https://localhost:44392/api/rentals/";
 
   constructor(private httpClient:HttpClient) { }

@@ -1,0 +1,84 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Update Car</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="carUpdateForm">
+          <div class="form-group mb-3 hidden">
+            <label for="id">Car Id</label>
+            <input
+              type="number"
+              id="id"
+              formControlName="carId"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="brand">Brands</label>
+            <select id="brand" formControlName="brandId" name="brand">
+              <option value="" disabled selected>Select a brand</option>
+              <option *ngFor="let brand of brands" [value]="brand.brandId">
+                {{ brand.brandName }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="color">Colors</label>
+            <select id="color" formControlName="colorId" name="color">
+              <option value="" disabled selected>Select a color</option>
+              <option *ngFor="let color of colors" [value]="color.colorId">
+                {{ color.colorName }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="carName">Car Name</label>
+            <input
+              type="text"
+              id="carName"
+              formControlName="carName"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="modelYear">Model Year</label>
+            <input
+              type="number"
+              id="modelYear"
+              formControlName="modelYear"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="dailyPrice">Daily Price</label>
+            <input
+              type="number"
+              id="dailyPrice"
+              formControlName="dailyPrice"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              formControlName="description"
+              class="form-control"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-info" (click)="backToCarList()">
+          Back To List
+        </button>
+        <button class="btn btn-fill btn-success" (click)="update()">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

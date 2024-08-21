@@ -1,0 +1,75 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  .card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+  
+  .card-header {
+    background-color: #17a2b8;
+    color: #ffffff;
+    padding: 16px;
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-body .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .card-body label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  
+  .card-body input,
+  .card-body select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .card-footer {
+    padding: 16px;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .card-footer .btn {
+    min-width: 120px;
+    margin: 0 10px;
+  }
+  
+  .btn-fill {
+    color: #ffffff;
+  }
+  
+  .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  

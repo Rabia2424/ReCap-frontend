@@ -61,12 +61,12 @@
               <div class="date-wrapper">
                 <label for="datepicker">Pick a Rent Date
                   <input [(ngModel)]="rentDate" type="date" id="datepicker" autocomplete="off">
-                </label>	
+                </label>
               </div>
               <div class="date-wrapper">
                 <label for="datepicker">Pick a Return Date
                   <input [(ngModel)]="returnDate" type="date" id="datepicker" autocomplete="off">
-                </label>	
+                </label>
               </div>
               <div class="button-wrapper">
                 <button (click)="addToCart(cardetail)" routerLink="/cartDetail/cartItems" class="btn fill">RENT NOW</button>
@@ -84,7 +84,6 @@
     </div>
     <br>
     <div class="rental-message"><h4>{{rentalMessage}}</h4></div>
-    <app-rental></app-rental>
   </div>
 </div>
 

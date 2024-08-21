@@ -11,7 +11,9 @@
         <!-- <button (click)="onSearch()" class="btn btn-custom" type="submit">Search</button> -->
       </div>
     </div>
+
     <app-car-filter></app-car-filter>
+
     <div class="container mx-auto mt-4">
       <div class="row">
         <div *ngFor="let cardetail of cardetails | filter:filterText" class="col-md-4">
@@ -29,7 +31,7 @@
                 <i>Daily Price: </i>{{cardetail.dailyPrice}}
               </p>
               <a class="btn btn-custom" style="margin-right:10px"
-                ><i class="fas fa-link"></i> Visit Rent</a
+                ><i style="color:aliceblue" class="fas fa-link"></i> Visit Rent</a
               >
               <button (click)="setCurrentCarDetail(cardetail)" routerLink="/cardetails/{{cardetail.carId}}" class="btn btn-custom"> Details</button>
             </div>
@@ -37,7 +39,6 @@
         </div>
       </div>
     </div>
-    <app-rental></app-rental>
   </div>
 
 

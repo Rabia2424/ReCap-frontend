@@ -1,14 +1,20 @@
 <div class="mainscreen">
   <div class="card">
     <div class="rightside">
-      <form action="">
+      <form [formGroup]="payFormGroup">
         <h1>CheckOut</h1>
         <h2>Payment Information</h2>
         <p>Cardholder Name</p>
-        <input [(ngModel)]="fullName" type="text" class="inputbox" name="name" required />
+        <input
+          formControlName="fullName"
+          type="text"
+          class="inputbox"
+          name="name"
+          required
+        />
         <p>Card Number</p>
         <input
-          [(ngModel)]="cardNumber"
+          formControlName="cardNumber"
           type="number"
           class="inputbox"
           name="card_number"
@@ -17,7 +23,7 @@
         />
 
         <p>Card Type</p>
-        <select class="inputbox" name="card_type" id="card_type" required>
+        <select formControlName="cardType" class="inputbox" name="card_type" id="card_type" required>
           <option value="">--Select a Card Type--</option>
           <option value="Visa">Visa</option>
           <option value="RuPay">RuPay</option>
@@ -26,7 +32,7 @@
         <div class="expcvv">
           <p class="expcvv_text">Expiry</p>
           <input
-            [(ngModel)]="expiry"
+            formControlName="expiry"
             type="date"
             class="inputbox"
             name="exp_date"
@@ -36,7 +42,7 @@
 
           <p class="expcvv_text2">CVV</p>
           <input
-            [(ngModel)]="cvv"
+            formControlName="cvv"
             type="password"
             class="inputbox"
             name="cvv"
@@ -45,7 +51,9 @@
           />
         </div>
         <p></p>
-        <button (click)="pay()" routerLink="/cars" type="submit" class="button">Complete Pay</button>
+        <button (click)="pay()" type="submit" class="button">
+          Complete Pay
+        </button>
       </form>
     </div>
   </div>

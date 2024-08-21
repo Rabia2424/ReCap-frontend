@@ -1,0 +1,61 @@
+<a routerLink="add" class="btn btn-success mb-2" style="float: right;"><i class="fa fa-plus" style="margin-right: 2px;" ></i>Add Car</a>
+<table style="background-color: transparent;" class="table">
+    <thead>
+      <tr>
+        <th>Car Id</th>
+        <th>Car Image</th>
+        <th>Brand Name</th>
+        <th>Color Name</th>
+        <th>Car Name</th>
+        <th>Model Year</th>
+        <th>Daily Price</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cardetail of carDetails">
+        <td>{{ cardetail.carId }}</td>
+        <td>
+            <img
+              *ngIf="cardetail.imagePath"
+              [src]="getImage(cardetail)"
+              class="icon"
+              style="object-fit: cover"
+              width="150"
+              height="75%"
+            />
+    
+            <img
+              *ngIf="!cardetail.imagePath"
+              [src]="getImage(cardetail)"
+              class="icon"
+              style="object-fit: cover"
+              width="150"
+              height="75%"
+            />
+        </td>
+        <td>{{ cardetail.brandName }}</td>
+        <td>{{ cardetail.colorName }}</td>
+        <td>{{ cardetail.carName }}</td>
+        <td>{{ cardetail.modelYear }}</td>
+        <td>{{ cardetail.dailyPrice }}</td>
+        <td>
+           <a routerLink="update/{{cardetail.carId}}" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+            Update
+           </a>
+           <a routerLink="delete/{{cardetail.carId}}" class="btn btn-danger mx-2">
+            <i class="fa fa-trash"></i>
+            Delete
+           </a>
+           <a routerLink="cardetails/{{cardetail.carId}}" class="btn btn-info">
+            <i class="fa fa-home"></i>
+            Show
+           </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  
