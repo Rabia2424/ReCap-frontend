@@ -49,7 +49,11 @@ h5 span{
 .full-height{
   min-height: 100vh;
 }
-[type="checkbox"]:checked,
+.checkbox .emailCheck{
+  margin-bottom:5px;
+}
+
+/* [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked){
   position: absolute;
   left: -9999px;
@@ -88,7 +92,7 @@ h5 span{
 }
 .checkbox:checked + label:before {
   transform: translateX(44px) rotate(-270deg);
-}
+} */
 
 
 .card-3d-wrap {

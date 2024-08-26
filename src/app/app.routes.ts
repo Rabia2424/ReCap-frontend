@@ -13,20 +13,20 @@ import { loginGuard } from './guards/login.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
-    {path:"",pathMatch:"full", component:CarComponent},
+    {path:"",redirectTo:"cars",pathMatch:"full"},
     {path:"cars", component:CarComponent},
     {path:"cars/brand/:brandId", component:CarComponent},
     {path:"cars/color/:colorId", component:CarComponent},
     {path:"cardetails/:carId", component:CarDetailComponent},
     {path:"car/cardetails/:carId", component:CarDetailComponent},
     {path: 'cars/brand/:brandId/color/:colorId', component: CarComponent },
-    {path: 'cars/payment', component: PaymentComponent },
+    {path: 'cars/payment', component: PaymentComponent,canActivate:[loginGuard] },
     {path: 'cartDetail/cartItems', component: CartDetailComponent },
     {path: 'car/add', component: CarAddComponent, canActivate:[loginGuard]},
     {path: 'car/update/:carId', component: CarUpdateComponent},
     {path: 'car/delete/:carId', component: CarDeleteComponent},
-    {path: 'car', component: CarListComponent,canActivate:[loginGuard]},
-    {path: 'cars/login', component: LoginComponent},
-    {path: 'cars/register', component: RegisterComponent},
+    {path: 'cars/list', component: CarListComponent,canActivate:[loginGuard]},
+    {path: 'account/login', component: LoginComponent},
+    {path: 'account/register', component: RegisterComponent},
     {path: 'profile', component: ProfileComponent}
 ];

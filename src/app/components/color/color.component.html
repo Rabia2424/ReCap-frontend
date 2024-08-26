@@ -15,7 +15,7 @@
         routerLink="/cars/color/{{color.colorId}}"
         *ngFor="let color of colors"
         [class]="getCurrentColorClass(color)">
-          <td>{{ color.colorName }}</td>
+          <td>{{ color.colorName }}<button routerLink="/cars" class="btn" style="margin-right: 10px;" (click)="clearCurrentColor(); $event.stopPropagation()" *ngIf="currentColor===color"><i class="fa-solid fa-circle-xmark"></i></button> </td>
         </tr>
       </tbody>
     </table>

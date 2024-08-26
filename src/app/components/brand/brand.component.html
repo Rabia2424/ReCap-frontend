@@ -7,7 +7,7 @@
       </thead>
       <tbody>
         <tr (click)="clearCurrentBrand()"
-         routerLink="/cars" 
+         routerLink="/cars"
         [class]="getAllBrandClass()">
           <td>All Cars</td>
         </tr>
@@ -15,7 +15,7 @@
         routerLink="/cars/brand/{{brand.brandId}}"
          *ngFor="let brand of brands"
          [class]="getCurrentBrandClass(brand)">
-          <td>{{ brand.brandName }}</td>
+          <td>{{ brand.brandName }} <button routerLink="/cars" class="btn" style="margin-right: 10px;" (click)="clearCurrentBrand(); $event.stopPropagation()" *ngIf="currentBrand===brand"><i class="fa-solid fa-circle-xmark"></i></button> </td>
         </tr>
       </tbody>
     </table>

@@ -17,7 +17,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="brand">Brands</label>
-            <select id="brand" formControlName="brandId" name="brand">
+            <select class="form-select" id="brand" formControlName="brandId" name="brand">
               <option value="" disabled selected>Select a brand</option>
               <option *ngFor="let brand of brands" [value]="brand.brandId">
                 {{ brand.brandName }}
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group mb-3">
             <label for="color">Colors</label>
-            <select id="color" formControlName="colorId" name="color">
+            <select class="form-select" id="color" formControlName="colorId" name="color">
               <option value="" disabled selected>Select a color</option>
               <option *ngFor="let color of colors" [value]="color.colorId">
                 {{ color.colorName }}

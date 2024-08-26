@@ -16,7 +16,11 @@
                                     <div class="section text-center">
                                         <h4 class="mb-4 pb-3">Log In</h4>
                                         <form [formGroup]="loginForm">
-                                        <div class="form-group">
+                                        <div *ngIf="rememberedEmail">
+                                          <h5 class="mb-4 fw-normal text-light" style="display: inline-block; margin-right: 10px;">Hoşgeldiniz</h5>
+                                          <span class=" text-light"style="font-size:18px"><span>{{rememberedEmail}}</span></span>
+                                        </div>
+                                        <div *ngIf="!rememberedEmail" class="form-group">
                                             <input formControlName="email" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
                                             <i class="input-icon uil uil-at"></i>
                                         </div>
@@ -24,8 +28,20 @@
                                             <input formControlName="password" type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
                                             <i class="input-icon uil uil-lock-alt"></i>
                                         </div>
+                                        <div class="checkbox mb-2 mt-3 text-light">
+                                          <label *ngIf="!rememberedEmail">
+                                              <input type="checkbox" value="remember-me" [(ngModel)]="rememberMe"
+                                              [ngModelOptions]="{standalone: true}"> Remember Email
+                                          </label>
+                                          <a *ngIf="rememberedEmail" (click)="deleteRememberedEmail()" style="color: white;"
+                                              href="/account/login">Sign in with a different account
+                                            </a>
+                                      </div>
                                         <a (click)="login()" class="btn mt-4">submit</a>
-                                        <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                                      <div class="text-light mt-3" style="font-size:14px">
+                                        If you don't have an account? <a routerLink="/account/register"
+                                            style="color: var(--firstThemeColor);">Register Now!</a>
+                                    </div>
                                       </form>
                                       </div>
                                   </div>

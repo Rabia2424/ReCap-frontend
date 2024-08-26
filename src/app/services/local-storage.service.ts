@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { locale } from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,23 +16,23 @@ export class LocalStorageService {
     if (json) {
       let value = JSON.parse(json);
       return value;
-    }else{
+    } else {
       return;
     }
   }
 
-  isSaved(key:string){
-    if(localStorage.getItem(key)){
+  isSaved(key: string) {
+    if (localStorage.getItem(key)) {
       return true;
     }
     return false;
   }
 
-  remove(key:string){
+  remove(key: string) {
     localStorage.removeItem(key);
   }
 
-  removeAll(){
+  removeAll() {
     localStorage.clear();
   }
 }

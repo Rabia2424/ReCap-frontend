@@ -32,7 +32,17 @@
                                             <input formControlName="password" type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
                                             <i class="input-icon uil uil-lock-alt"></i>
                                         </div>
-                                        <a routerLink="/cars/login" (click)="register()" class="btn mt-4">submit</a>
+                                        <div class="checkbox mt-2 text-light">
+                                          <label>
+                                              <input type="checkbox" value="remember-me" [(ngModel)]="rememberMe"
+                                                  [ngModelOptions]="{standalone: true}"> Remember Email
+                                          </label>
+                                      </div>
+                                        <a (click)="register()" class="btn mt-3">submit</a>
+                                        <div class="text-light mt-3" style="font-size:14px">
+                                          If you have an account? <a routerLink="/account/login"
+                                              style="color: var(--firstThemeColor);">Log In Now!</a>
+                                      </div>
                                       </form>
                                       </div>
                                   </div>

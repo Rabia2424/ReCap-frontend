@@ -8,8 +8,8 @@
         <form [formGroup]="carAddForm">
           <div class="form-group mb-3">
             <label for="brand">Brands</label>
-            <select id="brand" formControlName="brandId" name="brand">
-              <option value="" disabled selected>Select a brand</option>
+            <select class="form-select" id="brand" formControlName="brandId" name="brand">
+              <option value="" >Select a brand</option>
               <option *ngFor="let brand of brands" [value]="brand.brandId">
                 {{ brand.brandName }}
               </option>
@@ -17,8 +17,8 @@
           </div>
           <div class="form-group mb-3">
             <label for="color">Colors</label>
-            <select id="color" formControlName="colorId" name="color">
-              <option value="" disabled selected>Select a color</option>
+            <select class="form-select" id="color" formControlName="colorId" name="color">
+              <option value="">Select a color</option>
               <option *ngFor="let color of colors" [value]="color.colorId">
                 {{ color.colorName }}
               </option>
@@ -33,6 +33,18 @@
               class="form-control"
             />
           </div>
+          <div
+            *ngIf="carName && carName.invalid && (carName.dirty || carName.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="carName.errors?.['required']">Car Name is required.</div>
+            <div *ngIf="carName.errors?.['minlength']">
+              Car Name must be at least 4 characters long.
+            </div>
+            <div *ngIf="carName.errors?.['maxlength']">
+              Car Name must be at most 20 characters long.
+            </div>
+          </div>
           <div class="form-group mb-3">
             <label for="modelYear">Model Year</label>
             <input
@@ -41,6 +53,15 @@
               formControlName="modelYear"
               class="form-control"
             />
+          </div>
+          <div
+            *ngIf="modelYear && modelYear.invalid && (modelYear.dirty || modelYear.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="modelYear.errors?.['required']">Model Year is required.</div>
+            <div *ngIf="modelYear.errors?.['min']">
+              Model Year must be at least 2000 and later.
+            </div>
           </div>
           <div class="form-group mb-3">
             <label for="dailyPrice">Daily Price</label>
@@ -51,6 +72,15 @@
               class="form-control"
             />
           </div>
+          <div
+            *ngIf="dailyPrice && dailyPrice.invalid && (dailyPrice.dirty || dailyPrice.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="dailyPrice.errors?.['required']">Daily Price is required.</div>
+            <div *ngIf="dailyPrice.errors?.['min']">
+              Daily Price must be at least 6000.
+            </div>
+          </div>
           <div class="form-group mb-3">
             <label for="description">Description</label>
             <input
@@ -59,6 +89,15 @@
               formControlName="description"
               class="form-control"
             />
+          </div>
+          <div
+            *ngIf="description && description.invalid && (description.dirty || description.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="description.errors?.['required']">Description is required.</div>
+            <div *ngIf="description.errors?.['minlength']">
+              Description must be at least 20 characters long.
+            </div>
           </div>
         </form>
       </div>

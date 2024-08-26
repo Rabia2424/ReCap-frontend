@@ -1,0 +1,9 @@
+.form-control.ng-touched.ng-invalid,
+.form-select.ng-touched.ng-invalid {
+  border-bottom: 5px solid rgb(40, 2, 2) !important;
+}
+
+.form-control.ng-dirty.ng-valid,
+.form-select.ng-dirty.ng-valid {
+  border-bottom: 5px solid rgb(28, 182, 8) !important;
+}

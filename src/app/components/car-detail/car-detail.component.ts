@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { catchError, of } from 'rxjs';
 import { CartService } from '../../services/cart.service';
 import { Rental } from '../../models/rental';
+import { CustomerService } from '../../services/customer.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -44,6 +46,7 @@ export class CarDetailComponent implements OnInit {
   rentalMessage: string = '';
 
   rentals:Rental[]=[];
+  customerId:number;
 
   constructor(
     private cardetailService: CarDetailService,
@@ -51,7 +54,9 @@ export class CarDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private rentalService: RentalService,
     private toastrService: ToastrService,
-    private cartService:CartService
+    private cartService:CartService,
+    private customerService:CustomerService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +67,7 @@ export class CarDetailComponent implements OnInit {
       }
     });
     this.rentals = this.rentalService.getRental() || [];
+    this.getCustomerByUserId();
   }
 
   getCarDetails(carId: number) {
@@ -103,12 +109,23 @@ export class CarDetailComponent implements OnInit {
   //   });
   // }
 
+  getCustomerByUserId(){
+    let userId = this.authService.getUserId();
+    if(userId !=null){
+      this.customerService.getCustomerByUserId(userId).subscribe(response=>{
+        this.customerId = response.data.id;
+      })
+    }else{
+      this.toastrService.error("User Id not found!");
+    }
+  }
+
   addToCart(cardetail:CarDetail){
     let rental:Rental={
       carId: this.cardetail.carId,
       rentDate: this.rentDate,
       returnDate: this.returnDate,
-      customerId: 1,
+      customerId: this.customerId,
       modelFullName: '',
       fullName: cardetail.brandName + " " + cardetail.carName,
       dailyPrice: cardetail.dailyPrice,

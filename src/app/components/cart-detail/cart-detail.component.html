@@ -5,7 +5,7 @@
       <th>Brand</th>
       <th>Model</th>
       <th>Description</th>
-      <th>Total Amount</th>
+      <th>Daily Price</th>
       <th></th>
     </tr>
   </thead>
@@ -33,7 +33,7 @@
       <td>{{ cartItem.carDetail.brandName }}</td>
       <td>{{ cartItem.carDetail.carName }}</td>
       <td>{{ cartItem.carDetail.description }}</td>
-      <td>{{ cartItem.totalAmount | currency }}</td>
+      <td>{{ cartItem.carDetail.dailyPrice | currency }}</td>
       <td>
         <button
           (click)="removeFromCart(cartItem.carDetail)"

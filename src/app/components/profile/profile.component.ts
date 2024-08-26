@@ -101,7 +101,7 @@ export class ProfileComponent implements OnInit {
             this.clearPasswordForm();
           }
         },responseError=>{
-          this.toastrService.error(responseError.error.message);
+          this.toastrService.error(responseError.error.message);   
         }
       );
     } else {

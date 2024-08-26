@@ -9,6 +9,8 @@ import { LocalStorageService } from './local-storage.service';
 import { User } from '../models/user';
 import { UserPasswordModel } from '../models/userPasswordModel';
 import { jwtDecode } from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ export class AuthService {
 
   constructor(private httpClient:HttpClient,
     private localStorageService:LocalStorageService,
+    private toastrService: ToastrService,
+     private router: Router
   ) { }
 
   login(user:LoginModel):Observable<DataResponseModel<TokenModel>>{
@@ -25,7 +29,7 @@ export class AuthService {
   }
 
   logOut(){
-    this.localStorageService.remove("token");
+    this.localStorageService.removeAll();
   }
 
   register(user:RegisterModel):Observable<DataResponseModel<TokenModel>>{
@@ -58,6 +62,23 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  checkTokenExpiration() {
+    const expirationDate = this.localStorageService.getItem('expirationDate');
+    if (expirationDate) {
+      const expirationTime = new Date(expirationDate).getTime();
+      const currentTime = new Date().getTime();
+
+      if (currentTime > expirationTime) {
+        this.localStorageService.remove('token');
+        this.localStorageService.remove('expirationDate');
+        this.toastrService.warning(
+          'Your session has expired. Please log in again.'
+        );
+        this.router.navigate(['/account/login']);
+      }
+    }
   }
 
 }

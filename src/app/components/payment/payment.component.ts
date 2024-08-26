@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 })
 export class PaymentComponent implements OnInit {
   payFormGroup: FormGroup = new FormGroup({});
+  customerId:number;
 
   constructor(
     private paymentService: PaymentService,
@@ -37,14 +38,26 @@ export class PaymentComponent implements OnInit {
 
   createPayFormGroup() {
     this.payFormGroup = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      cardNumber: ['', Validators.required],
+      fullName: ['', [Validators.required,Validators.minLength(5)]],
+      cardNumber: ['', [Validators.required]],
       cardType: ['', Validators.required],
       expiry: ['', Validators.required],
       cvv: ['', Validators.required],
     });
   }
 
+  get fullName(){
+    return this.payFormGroup.get('fullName');
+  }
+  get cardNumber(){
+    return this.payFormGroup.get('cardNumber');
+  }
+  get expiry(){
+    return this.payFormGroup.get('expiry');
+  }
+  get cvv(){
+    return this.payFormGroup.get('cvv');
+  }
   // pay(){
   //   if (this.payFormGroup.valid) {
 
@@ -64,12 +77,16 @@ export class PaymentComponent implements OnInit {
 
   pay() {
     if (this.payFormGroup.valid) {
+      let rentals = this.rentalService.getRental();
+          if(rentals && rentals.length>0){
+            this.customerId = rentals[0].customerId;
+          }
       let payment = Object.assign({}, this.payFormGroup.value);
+      payment.customerId= this.customerId;
       console.log(payment);
-      this.paymentService.pay(payment).subscribe((response) => {
+      this.paymentService.add(payment).subscribe((response) => {
         if (response.success) {
           this.toastrService.success(response.message);
-          let rentals = this.rentalService.getRental();
           console.log(rentals);
           rentals?.forEach((rental) => {
             if (rental && rental.rentDate && rental.returnDate) {
@@ -84,6 +101,12 @@ export class PaymentComponent implements OnInit {
           });
         } else {
           this.toastrService.error(response.message);
+        }
+      },responseError=>{
+        if(responseError.error.Errors.length>0){
+          for(let i = 0;i<responseError.error.Errors.length;i++){
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Validation Exception!");
+          }
         }
       });
     }

@@ -6,14 +6,23 @@
         <h2>Payment Information</h2>
         <p>Cardholder Name</p>
         <input
+          class="form-control"
           formControlName="fullName"
           type="text"
           class="inputbox"
           name="name"
           required
         />
+        <div
+        *ngIf="fullName && fullName.invalid && (fullName.dirty || fullName.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="fullName.errors?.['required']">Full Name is required.</div>
+        <div *ngIf="fullName.errors?.['minlength']">FullName must be at least 5 characters long.</div>
+      </div>
         <p>Card Number</p>
         <input
+          class="form-control"
           formControlName="cardNumber"
           type="number"
           class="inputbox"
@@ -21,7 +30,13 @@
           id="card_number"
           required
         />
-
+        <div
+        *ngIf="cardNumber && cardNumber.invalid && (cardNumber.dirty || cardNumber.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="cardNumber.errors?.['required']">Card Number is required.</div>
+        <div *ngIf="cardNumber.errors?.['minlength']">Card Number must be 16 characters long.</div>
+      </div>
         <p>Card Type</p>
         <select formControlName="cardType" class="inputbox" name="card_type" id="card_type" required>
           <option value="">--Select a Card Type--</option>
@@ -32,6 +47,7 @@
         <div class="expcvv">
           <p class="expcvv_text">Expiry</p>
           <input
+            class="form-control"
             formControlName="expiry"
             type="date"
             class="inputbox"
@@ -39,9 +55,15 @@
             id="exp_date"
             required
           />
-
+          <div
+        *ngIf="expiry && expiry.invalid && (expiry.dirty || expiry.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="expiry.errors?.['required']">Expiry Date is required.</div>
+      </div>
           <p class="expcvv_text2">CVV</p>
           <input
+            class="form-control"
             formControlName="cvv"
             type="password"
             class="inputbox"
@@ -49,11 +71,17 @@
             id="cvv"
             required
           />
+          <div
+        *ngIf="cvv && cvv.invalid && (cvv.dirty || cvv.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="cvv.errors?.['required']">CVV is required.</div>
         </div>
         <p></p>
         <button (click)="pay()" type="submit" class="button">
           Complete Pay
         </button>
+        </div>
       </form>
     </div>
   </div>

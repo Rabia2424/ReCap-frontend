@@ -4,12 +4,14 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,
+  imports: [CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule],
   templateUrl: './login.component.html',
@@ -17,6 +19,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
 })
 export class LoginComponent implements OnInit{
   loginForm:FormGroup = new FormGroup({});
+  rememberMe:boolean = false;
+  rememberedEmail:any;
 
   constructor(private formBuilder:FormBuilder,
     private authService:AuthService,
@@ -27,6 +31,8 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.createLoginForm();
+    this.checkRememberedUser();
+    this.autoFillEmail();
   }
 
   createLoginForm(){
@@ -44,10 +50,14 @@ export class LoginComponent implements OnInit{
         if(response.success){
           this.toastrService.success(response.message);
           this.localStorageService.setItem("token", response.data.token);
+          this.localStorageService.setItem("expirationDate", response.data.expirationDate);
+          if(this.rememberMe){
+            this.saveEmail(loginModel.email);
+          }
           this.router.navigate(['/cars']);
           setTimeout(()=>{
             window.location.reload();
-          },100);
+          },1000);
         }
       },responseError=>{
         console.log(responseError);
@@ -61,6 +71,32 @@ export class LoginComponent implements OnInit{
 
   clearForm(){
     this.loginForm.reset();
+  }
+
+  autoFillEmail(){
+    if(this.rememberedEmail){
+      let email = this.localStorageService.getItem("remember");
+      if(email != null){
+        this.loginForm.get('email')?.setValue(email);
+      }
+    }
+  }
+
+  checkRememberedUser(){
+    let result = this.localStorageService.getItem("remember");
+    if(result){
+      this.rememberedEmail = result;
+    }else{
+      this.rememberedEmail = undefined;
+    }
+  }
+
+  deleteRememberedEmail(){
+    this.localStorageService.remove("remember");
+  }
+
+  saveEmail(email:string){
+    this.localStorageService.setItem("remember",email);
   }
 
 }
