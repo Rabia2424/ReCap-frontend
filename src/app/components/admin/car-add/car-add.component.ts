@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl,Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { Brand } from '../../models/brand';
-import { Color } from '../../models/color';
-import { CarService } from '../../services/car.service';
+import { Brand } from '../../../models/brand';
+import { Color } from '../../../models/color';
+import { CarService } from '../../../services/car.service';
 import { ToastrService } from 'ngx-toastr';
-import { BrandService } from '../../services/brand.service';
-import { ColorService } from '../../services/color.service';
+import { BrandService } from '../../../services/brand.service';
+import { ColorService } from '../../../services/color.service';
 
 @Component({
   selector: 'app-car-add',
@@ -45,7 +45,7 @@ export class CarAddComponent implements OnInit{
       carName:["",[Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
       modelYear:["",[Validators.required,Validators.min(2000)]],
       dailyPrice:["",[Validators.required,Validators.min(6000)]],
-      description:["", [Validators.required,Validators.minLength(20)]]
+      description:["", [Validators.required]]
     })
   };
 

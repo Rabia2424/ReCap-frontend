@@ -4,3 +4,17 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-dialog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ekranın tamamı boyunca ortalama */
+  max-width: 80vw; /* Dialog genişliği, isteğe bağlı olarak ayarlanabilir */
+  margin: auto; /* Yatay ve dikey ortalama */
+  border-radius: 8px; /* Köşeleri yuvarlatma */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}

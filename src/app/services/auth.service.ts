@@ -54,7 +54,7 @@ export class AuthService {
     if (token) {
       try {
         const decodedToken: any = jwtDecode(token);
-        //console.log('Decoded Token:', decodedToken); // Token'ın içeriğini kontrol edin
+        console.log('Decoded Token:', decodedToken); // Token'ın içeriğini kontrol edin
         const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
         return userId ? Number(userId) : null;
       } catch (error) {

@@ -22,7 +22,7 @@ body {
   -webkit-background-clip: text !important; /* Chrome, Safari, Opera */
   -moz-background-clip: text !important; /* Firefox */
   background-clip: text !important; /* Standard */
-  border-image-source: var(--gradient) !important; 
+  border-image-source: var(--gradient) !important;
   text-decoration: none;
   transition: all .4s ease;
 }
@@ -33,7 +33,7 @@ body {
   -moz-background-clip: none !important; /* Firefox */
   background-clip: none !important; /* Standard */
   -webkit-text-fill-color: #fff !important;
-  border: 5px solid #fff !important; 
+  border: 5px solid #fff !important;
   box-shadow: #222 1px 0 10px;
   text-decoration: underline;
 }
@@ -73,7 +73,7 @@ img{
 
 .select-part{
   margin-right: 3em;
-} 
+}
 
 .custom-select select {
   appearance: none;
@@ -112,7 +112,7 @@ img{
 
 
 /*=============
-Aesthetics 
+Aesthetics
 =========================*/
 
 * {

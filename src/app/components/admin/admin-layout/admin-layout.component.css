@@ -1,0 +1,15 @@
+body {
+  font-size: .875rem;
+}
+
+main {
+  padding-top: 1rem;
+}
+
+.nav-link.active {
+  color: #0d6efd;
+}
+
+.nav-link i {
+  margin-right: 10px;
+}

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CarDetailService } from '../../services/car-detail.service';
-import { CarDetail } from '../../models/car-detail';
+import { CarDetailService } from '../../../services/car-detail.service';
+import { CarDetail } from '../../../models/car-detail';
 
 @Component({
   selector: 'app-car-list',

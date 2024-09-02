@@ -7,13 +7,17 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
+import { CarAddComponent } from '../admin/car-add/car-add.component';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-navi',
   standalone: true,
   imports: [CommonModule,
     RouterModule,
-    CartSummaryComponent
+    CartSummaryComponent,
   ],
   templateUrl: './navi.component.html',
   styleUrl: './navi.component.css'
@@ -24,7 +28,8 @@ export class NaviComponent implements OnInit{
 
   constructor(private authService:AuthService,
     private userService:UserService,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private matDialog:MatDialog
   ){};
   ngOnInit(): void {
     console.log(localStorage.getItem("token"));
@@ -46,9 +51,16 @@ export class NaviComponent implements OnInit{
     return this.authService.isAuthenticated();
   }
 
-  logOut(){
-    this.authService.logOut();
-    this.toastrService.info("Logged Out");
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    //dialogConfig.id = "modal-component";
+    dialogConfig.height = "350px";
+    dialogConfig.width = "600px";
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
 
 }

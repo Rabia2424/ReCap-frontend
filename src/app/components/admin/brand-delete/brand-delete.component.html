@@ -1,0 +1,13 @@
+<div class="modal-content-wrapper">
+  <header class="modal-header">
+      <h1 class="modal-title">Confirm Deletion</h1>
+  </header>
+  <section class="modal-body">
+      <p>Are you sure you want to delete {{brand.brandName}} brand?</p>
+  </section>
+  <footer class="modal-footer">
+      <button mat-raised-button class="modal-action-button" (click)="confirmDelete()">Yes, Delete</button>
+      <button mat-raised-button class="modal-cancel-button" (click)="closeDialog()">Cancel</button>
+  </footer>
+</div>
+

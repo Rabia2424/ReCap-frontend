@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/admin/car/list']">
+              <i class="bi bi-car-front"></i> Car List
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/car/add']">
+              <i class="bi bi-plus-circle"></i> Add Car
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/brand/brandManager']">
+              <i class="bi bi-tags"></i> Brand Manager
+            </a>
+          </li>
+          <!-- Diğer menü öğeleri burada -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Admin Panel</h1>
+      </div>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
