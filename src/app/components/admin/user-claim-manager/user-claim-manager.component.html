@@ -1,0 +1,56 @@
+<div *ngIf="userClaims" class="cont">
+  <div class="card">
+      <div class="card-header text-center bg-dark bg-gradient text-light">
+          <h3>User Operation Claim Management</h3>
+          ({{userClaims.length}} user claims listed!)
+      </div>
+      <div class="card-body">
+          <ul class="list-group">
+              <li class="list-group-item bg-warning bg-gradient text-center">
+                  <div class="row align-items-center">
+                      <div class="col-md-1">
+                          <strong>ID</strong>
+                      </div>
+                      <div class="col-md-3">
+                          <strong>Full Name</strong>
+                      </div>
+                      <div class="col-md-5">
+                        <strong>User Claims</strong>
+                    </div>
+                      <div class="col-md-3">
+                          <button (click)="showUserClaimAddModal()"  type="button" class="btn btn-success float-end">
+                              Add User Role
+                          </button>
+                      </div>
+                  </div>
+              </li>
+              <li *ngFor="let userClaim of userClaims" class="list-group-item list-group-item-action text-center">
+                  <div class="row align-items-center">
+                      <div class="col-md-1">
+                          {{userClaim.id}}
+                      </div>
+                      <div class="col-md-3">
+                          {{userClaim.userFirstName}} {{userClaim.userLastName}}
+                      </div>
+                      <div class="col-md-5">
+                        <p *ngFor="let claimName of userClaim.operationClaimNames">{{claimName}}</p>
+                    </div>
+                      <div class="col-md-3">
+                        <div class="btn-group float-end">
+                          <button (click)="showUserClaimDeleteModal(userClaim)" type="button" class="btn btn-danger px-3">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                  class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                  <path
+                                      d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z">
+                                  </path>
+                              </svg>
+                          </button>
+                      </div>
+                      </div>
+                  </div>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+

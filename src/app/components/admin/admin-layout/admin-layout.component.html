@@ -1,25 +1,30 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
       <div class="position-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="['/admin/car/list']">
+            <a (click)="setCurrentLink('/admin/car/list')" [class]="getCurrentLinkClass('/admin/car/list')" class="nav-link" [routerLink]="['/admin/car/list']">
               <i class="bi bi-car-front"></i> Car List
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/admin/car/add']">
+            <a (click)="setCurrentLink('/admin/car/add')" [class]="getCurrentLinkClass('/admin/car/add')" class="nav-link" [routerLink]="['/admin/car/add']">
               <i class="bi bi-plus-circle"></i> Add Car
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/admin/brand/brandManager']">
+            <a (click)="setCurrentLink('/admin/brand/brandManager')" [class]="getCurrentLinkClass('/admin/brand/brandManager')" class="nav-link" [routerLink]="['/admin/brand/brandManager']">
               <i class="bi bi-tags"></i> Brand Manager
             </a>
           </li>
-          <!-- Diğer menü öğeleri burada -->
+          <li class="nav-item">
+            <a (click)="setCurrentLink('/admin/userClaim/userClaimManager')" [class]="getCurrentLinkClass('/admin/userClaim/userClaimManager')" class="nav-link" [routerLink]="['/admin/userClaim/userClaimManager']">
+              <i class="bi bi-person-badge"></i> User Claim Manager
+            </a>
+          </li>
+          <!-- Additional menu items here -->
         </ul>
       </div>
     </nav>
@@ -27,10 +32,9 @@
     <!-- Content -->
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Admin Panel</h1>
+        <h1 class="h2 text-light">Admin Panel</h1>
       </div>
       <router-outlet></router-outlet>
     </main>
   </div>
 </div>
-

@@ -1,0 +1,39 @@
+<div class="modal-content-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="title">Add User Claim</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="userClaimDeleteForm">
+        <div class="form-group mb-3">
+          <label for="userId">User</label>
+          <input
+            type="text"
+            id="userId"
+            formControlName="userId"
+            class="form-control"
+
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="role">Roles</label>
+          <select class="form-select" id="role" formControlName="operationClaimId" name="role">
+            <option value="">Select a role</option>
+            <option *ngFor="let role of userRoles" [value]="role.id">
+              {{ role.name }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-fill btn-info" (click)="closeModal()">
+        Cancel
+      </button>
+      <button class="btn btn-fill btn-success" (click)="delete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+
+

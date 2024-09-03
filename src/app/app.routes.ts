@@ -15,6 +15,7 @@ import { adminPanelGuard } from './guards/admin-panel.guard';
 import { BrandManagerComponent } from './components/admin/brand-manager/brand-manager.component';
 import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layout.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { UserClaimManagerComponent } from './components/admin/user-claim-manager/user-claim-manager.component';
 
 export const routes: Routes = [
     {path:"",redirectTo:"cars",pathMatch:"full"},
@@ -26,12 +27,13 @@ export const routes: Routes = [
     {path: 'cars/brand/:brandId/color/:colorId', component: CarComponent },
     {path: 'cars/payment', component: PaymentComponent,canActivate:[loginGuard] },
     {path: 'cartDetail/cartItems', component: CartDetailComponent },
-    {path: 'admin', component:AdminLayoutComponent,canActivate:[loginGuard,adminPanelGuard],data: { expectedRoles: ['car.add'] }, children:[
+    {path: 'admin', component:AdminLayoutComponent,canActivate:[loginGuard,adminPanelGuard],data: { expectedRoles: ['admin'] }, children:[
       {path: 'car/list', component: CarListComponent},
       {path: 'car/add', component: CarAddComponent},
       {path: 'car/update/:carId', component: CarUpdateComponent},
       {path: 'car/delete/:carId', component: CarDeleteComponent},
-      {path: 'brand/brandManager', component: BrandManagerComponent}
+      {path: 'brand/brandManager', component: BrandManagerComponent},
+      {path: 'userClaim/userClaimManager', component: UserClaimManagerComponent}
     ]},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
