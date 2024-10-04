@@ -16,15 +16,20 @@ import { BrandManagerComponent } from './components/admin/brand-manager/brand-ma
 import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layout.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { UserClaimManagerComponent } from './components/admin/user-claim-manager/user-claim-manager.component';
+import { CarImageAddComponent } from './components/admin/car-image-add/car-image-add.component';
+import { CarImageManagerComponent } from './components/admin/car-image-manager/car-image-manager.component';
 
 export const routes: Routes = [
     {path:"",redirectTo:"cars",pathMatch:"full"},
     {path:"cars", component:CarComponent},
     {path:"cars/brand/:brandId", component:CarComponent},
     {path:"cars/color/:colorId", component:CarComponent},
-    {path:"cardetails/:carId", component:CarDetailComponent},
+    {path:"cars/minPrice/:minPrice", component:CarComponent},
+    {path:"cars/maxPrice/:maxPrice", component:CarComponent},
+    {path:"cardetails/:carId", component:CarDetailComponent,canActivate:[loginGuard]},
     {path:"car/cardetails/:carId", component:CarDetailComponent},
     {path: 'cars/brand/:brandId/color/:colorId', component: CarComponent },
+    {path: 'cars/minPrice/:minPrice/maxPrice/:maxPrice', component: CarComponent },
     {path: 'cars/payment', component: PaymentComponent,canActivate:[loginGuard] },
     {path: 'cartDetail/cartItems', component: CartDetailComponent },
     {path: 'admin', component:AdminLayoutComponent,canActivate:[loginGuard,adminPanelGuard],data: { expectedRoles: ['admin'] }, children:[
@@ -33,7 +38,8 @@ export const routes: Routes = [
       {path: 'car/update/:carId', component: CarUpdateComponent},
       {path: 'car/delete/:carId', component: CarDeleteComponent},
       {path: 'brand/brandManager', component: BrandManagerComponent},
-      {path: 'userClaim/userClaimManager', component: UserClaimManagerComponent}
+      {path: 'userClaim/userClaimManager', component: UserClaimManagerComponent},
+      {path: 'carImage/carImageManager', component: CarImageManagerComponent},
     ]},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},

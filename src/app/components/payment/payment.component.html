@@ -77,12 +77,38 @@
       >
         <div *ngIf="cvv.errors?.['required']">CVV is required.</div>
         </div>
+      </div>
         <p></p>
         <button (click)="pay()" type="submit" class="button">
           Complete Pay
         </button>
-        </div>
       </form>
+      <div class="form-checkbox">
+        <input type="checkbox" [(ngModel)]="saveCard" name="saveCard">
+        <label>Save this card</label>
+      </div>
+      <div class="form-checkbox">
+        <input type="checkbox" [(ngModel)]="payWithSaveCard" (ngModelChange)="onCheckboxChange($event)" name="payWithSaveCard">
+        <label>Pay with already saved card</label>
+      </div>
+      <table *ngIf="savedPayments.length>0 && payWithSaveCard">
+        <thead>
+          <td>FullName</td>
+          <td>CardNumber</td>
+          <td>Expiry Date</td>
+          <td>CVV</td>
+        </thead>
+        <tbody>
+          <div *ngFor="let payment of savedPayments">
+            <td>{{payment.fullName}}</td>
+            <td>{{payment.cardNumber}}</td>
+            <td>{{payment.expiry}}</td>
+            <td>{{payment.cvv}}</td>
+          </div>
+        </tbody>
+      </table>
+
     </div>
   </div>
 </div>
+

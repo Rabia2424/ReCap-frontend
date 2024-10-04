@@ -1,0 +1,36 @@
+<div class="modal-content-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="title">Add Car Image</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="carImageAddForm">
+        <div class="form-group mb-3">
+          <label for="user">Car Id</label>
+          <select class="form-select" id="user" formControlName="carId" name="user">
+            <option value="">Select a car</option>
+            <option *ngFor="let car of cars" [value]="car.carId">
+              {{ car.carName }}
+            </option>
+          </select>
+        </div>
+          <label>Image</label>
+          <input type="file" (change)="onFileChange($event)" />
+      </form>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-fill btn-info" (click)="closeModal()">
+        Cancel
+      </button>
+      <button class="btn btn-fill btn-success" (click)="add()">Add</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

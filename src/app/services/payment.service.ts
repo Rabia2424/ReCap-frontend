@@ -12,7 +12,7 @@ export class PaymentService {
 
   apiUrl="https://localhost:44392/api/payments/";
   constructor(private httpClient:HttpClient) { }
-  
+
   add(payment:Payment):Observable<ResponseModel>{
     let newPath=this.apiUrl + "add";
     return this.httpClient.post<ResponseModel>(newPath,payment);
@@ -23,9 +23,9 @@ export class PaymentService {
     return this.httpClient.post<ResponseModel>(newPath,payment);
   }
 
-  pay(payment:Payment):Observable<ResponseModel>{
-    let newPath = this.apiUrl + "pay";
-    return this.httpClient.post<ResponseModel>(newPath,payment);
+  pay(customerId:number):Observable<ResponseModel>{
+    let newPath = this.apiUrl + 'pay?customerId=' + customerId;
+    return this.httpClient.get<ResponseModel>(newPath);
   }
 
   checkIfThisCardIsAlreadySavedForThisCustomer(payment: Payment) {
@@ -37,5 +37,5 @@ export class PaymentService {
     let newPath= this.apiUrl + 'getallbycustomerid?customerId=' + customerId;
     return this.httpClient.get<ListResponseModel<Payment>>(newPath);
   }
-  
+
 }

@@ -12,11 +12,14 @@ import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   apiUrl = "https://localhost:44392/api/auth/";
+
+
 
   constructor(private httpClient:HttpClient,
     private localStorageService:LocalStorageService,
@@ -51,15 +54,15 @@ export class AuthService {
 
   getUserId(): number | null {
     const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decodedToken: any = jwtDecode(token);
-        console.log('Decoded Token:', decodedToken); // Token'ın içeriğini kontrol edin
-        const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-        return userId ? Number(userId) : null;
-      } catch (error) {
-        console.error('Token decoding error:', error); // Hata olup olmadığını kontrol edin
-      }
+      if (token) {
+        try {
+          const decodedToken: any = jwtDecode(token);
+          console.log('Decoded Token:', decodedToken); // Token'ın içeriğini kontrol edin
+          const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+          return userId ? Number(userId) : null;
+        } catch (error) {
+          console.error('Token decoding error:', error); // Hata olup olmadığını kontrol edin
+        }
     }
     return null;
   }
@@ -80,5 +83,13 @@ export class AuthService {
       }
     }
   }
+
+
+
+  // verifyEmail(token:string){
+  //   let newPath= `https://localhost:44392/api/emailVerification/email-verify/${token}`;
+  //   return this.httpClient.get(newPath);
+  // }
+
 
 }

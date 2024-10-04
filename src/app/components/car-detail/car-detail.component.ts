@@ -56,7 +56,7 @@ export class CarDetailComponent implements OnInit {
     private toastrService: ToastrService,
     private cartService:CartService,
     private customerService:CustomerService,
-    private authService:AuthService
+    private authService:AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -133,9 +133,8 @@ export class CarDetailComponent implements OnInit {
     }
 
     if(rental.rentDate && rental.returnDate){
-      this.rentalService.checkRental(rental).pipe(
-        catchError(error => of({ message: error.error?.message ?? 'An unknown error occurred.' }))
-       ).subscribe(response=>{
+      this.rentalService.checkRental(rental)
+        .subscribe(response=>{
         const checkRentalResponse = response as { success: boolean; message: string }
         if(checkRentalResponse.success){
 

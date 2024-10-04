@@ -13,6 +13,7 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 export class AdminLayoutComponent implements OnInit{
 
   currentLink:string|null;
+
   constructor(private router:Router){};
   ngOnInit(): void {
     // this.setCurrentLink("/admin/car/list");

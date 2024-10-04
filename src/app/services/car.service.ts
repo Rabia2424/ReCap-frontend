@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
@@ -20,6 +20,19 @@ export class CarService {
   getCars():Observable<ListResponseModel<CarDetail>> {
     let newPath = this.apiUrl + "cars/getcardetails";
     return this.httpClient.get<ListResponseModel<CarDetail>>(newPath);
+  }
+
+  getCarsByMinandMaxPrice(minPrice:number|null,maxPrice:number|null):Observable<ListResponseModel<CarDetail>>{
+    let params = new HttpParams();
+
+    if (minPrice !== null) {
+      params = params.set('minPrice', minPrice.toString());
+    }
+
+    if (maxPrice !== null) {
+      params = params.set('maxPrice', maxPrice.toString());
+    }
+    return this.httpClient.get<ListResponseModel<CarDetail>>(this.apiUrl + "cars/getcarsbyminandmaxprice", {params});
   }
 
   getCarsByBrand(brandId:number):Observable<ListResponseModel<CarDetail>> {

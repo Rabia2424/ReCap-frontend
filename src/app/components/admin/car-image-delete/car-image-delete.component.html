@@ -1,0 +1,38 @@
+<div class="modal-content-wrapper">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="title">Add Car Image</h5>
+    </div>
+    <div class="card-body">
+      <form >
+        <div class="form-group mb-3">
+          <label for="carId">Car Id</label>
+          <input
+            type="text"
+            id="carId"
+            class="form-control"
+            [value]="currentCarImage.carId"
+          />
+        </div>
+          <label>Image Path</label>
+          <input [value]="currentCarImage.imagePath"/>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-fill btn-info" (click)="closeModal()">
+        Cancel
+      </button>
+      <button class="btn btn-fill btn-success" (click)="delete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

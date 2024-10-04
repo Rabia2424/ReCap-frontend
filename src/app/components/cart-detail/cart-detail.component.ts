@@ -5,10 +5,10 @@ import { CartItem } from '../../models/cartItem';
 import { CarDetail } from '../../models/car-detail';
 import { CarService } from '../../services/car.service';
 import { CartService } from '../../services/cart.service';
-import { CartItems } from '../../models/cartItems';
 import { Rental } from '../../models/rental';
 import { RentalService } from '../../services/rental.service';
 import { ToastrService } from 'ngx-toastr';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-cart-detail',
@@ -42,21 +42,22 @@ export class CartDetailComponent implements OnInit {
 
   getCart() {
     this.cartItems = this.cartService.list();
+    console.log();
   }
 
   removeFromCart(cardetail: CarDetail) {
     this.rentals = this.rentalService.getRental() || [];
     console.log(this.rentals);
     console.log('aaa');
-    let rental = this.rentals.find((n) => n.carId === cardetail.carId);
-    if (rental) {
-      const index = this.rentals.findIndex((r) => r.carId == rental.carId);
+    //let rental = this.rentals.find((n) => n.carId === cardetail.carId);
+
+      const index = this.rentals.findIndex((r) => r.carId == cardetail.carId);
       if (index !== -1) {
         this.rentals.splice(index, 1);
         this.rentalService.setRental(this.rentals);
         console.log(this.rentals);
         this.cartService.removeFromCart(cardetail);
-      }
+
     } else {
       this.toastrService.error('Rental not found!');
     }

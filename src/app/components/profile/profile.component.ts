@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit {
       email: ['', Validators.required],
     });
   }
-
   createPasswordForm() {
     this.passwordForm = this.formBuilder.group({
       userId: [this.authService.getUserId()],
@@ -57,7 +56,6 @@ export class ProfileComponent implements OnInit {
       repeatNewPassword: ['', Validators.required],
     });
   }
-
   getCurrentUser() {
     const userId = this.authService.getUserId();
     if (userId != null) {
@@ -101,7 +99,7 @@ export class ProfileComponent implements OnInit {
             this.clearPasswordForm();
           }
         },responseError=>{
-          this.toastrService.error(responseError.error.message);   
+          this.toastrService.error(responseError.error.message);
         }
       );
     } else {

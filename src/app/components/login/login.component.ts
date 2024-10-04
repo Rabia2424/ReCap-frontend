@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit{
   loginForm:FormGroup = new FormGroup({});
   rememberMe:boolean = false;
   rememberedEmail:any;
+  error:string;
 
   constructor(private formBuilder:FormBuilder,
     private authService:AuthService,
@@ -49,7 +50,9 @@ export class LoginComponent implements OnInit{
       this.authService.login(loginModel).subscribe(response=>{
         if(response.success){
           this.toastrService.success(response.message);
-          this.localStorageService.setItem("token", response.data.token);
+          localStorage.setItem("token", response.data.token);
+          // console.log("From login point " + localStorage.getItem('token'));
+          // console.log("From login point from service " + this.localStorageService.getItem('token'));
           this.localStorageService.setItem("expirationDate", response.data.expirationDate);
           if(this.rememberMe){
             this.saveEmail(loginModel.email);
@@ -60,8 +63,9 @@ export class LoginComponent implements OnInit{
           },1000);
         }
       },responseError=>{
-        console.log(responseError);
-        this.toastrService.error(responseError.error.message);
+        console.log(responseError); //This line write the message come from error interceptor.
+        // this.toastrService.error(responseError.error.message);
+        this.error = responseError;
         this.clearForm();
       })
     }else{

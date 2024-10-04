@@ -6,13 +6,15 @@ import { ListResponseModel } from '../models/listResponseModel';
 import { DataResponseModel } from '../models/dataResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { Response } from 'express';
+import { AuthService } from './auth.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalService {
 
-  private rentals:Rental[]|null = [];
+  private rentals:Rental[]|null;
 
   setRental(rentals:Rental[]){
     this.rentals = rentals;
@@ -24,7 +26,8 @@ export class RentalService {
 
   apiUrl="https://localhost:44392/api/rentals/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,
+  ) { }
 
   getRentals():Observable<ListResponseModel<Rental>>{
     let newPath = this.apiUrl + "getrentaldetails"

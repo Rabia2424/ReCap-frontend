@@ -23,10 +23,10 @@ export class CarFilterComponent implements OnInit{
   colors:Color[]=[];
   cars:CarDetail[]=[];
   isDataLoaded=false;
-  selectedBrandId:number|null=null;
-  selectedColorId:number|null=null;
+  selectedBrandId:number|null;
+  selectedColorId:number|null;
   routeLink="";
-  
+
 
   constructor(private brandService:BrandService,
     private colorService:ColorService,
@@ -71,7 +71,7 @@ export class CarFilterComponent implements OnInit{
       this.routeLink="/cars/color/" + this.selectedColorId;
       return this.routeLink;
     }else{
-      this.routeLink=""; 
+      this.routeLink="";
       return this.routeLink;
     }
   }

@@ -24,6 +24,9 @@ import { RouterModule } from '@angular/router';
 export class PaymentComponent implements OnInit {
   payFormGroup: FormGroup = new FormGroup({});
   customerId:number;
+  saveCard:boolean = false;
+  payWithSaveCard:boolean=false;
+  savedPayments:Payment[]=[];
 
   constructor(
     private paymentService: PaymentService,
@@ -76,45 +79,83 @@ export class PaymentComponent implements OnInit {
   // }
 
   pay() {
+    console.log(this.saveCard);
+    console.log(this.payWithSaveCard);
+    let rentals = this.rentalService.getRental();
+    if(rentals && rentals.length>0){
+      this.customerId = rentals[0].customerId;
+    }
     if (this.payFormGroup.valid) {
-      let rentals = this.rentalService.getRental();
-          if(rentals && rentals.length>0){
-            this.customerId = rentals[0].customerId;
-          }
+
       let payment = Object.assign({}, this.payFormGroup.value);
       payment.customerId= this.customerId;
       console.log(payment);
-      this.paymentService.add(payment).subscribe((response) => {
-        if (response.success) {
-          this.toastrService.success(response.message);
-          console.log(rentals);
-          rentals?.forEach((rental) => {
-            if (rental && rental.rentDate && rental.returnDate) {
-              this.rentalService.add(rental).subscribe((response) => {
-                if (response.success) {
-                  this.toastrService.success(response.message);
-                }
-              });
-            } else {
-              this.toastrService.error('There is no rent and return date');
-            }
-          });
-        } else {
-          this.toastrService.error(response.message);
-        }
-      },responseError=>{
-        if(responseError.error.Errors.length>0){
-          for(let i = 0;i<responseError.error.Errors.length;i++){
-            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Validation Exception!");
+
+      if(this.saveCard){
+        this.paymentService.add(payment).subscribe((response) => {
+          if (response.success) {
+            this.toastrService.success(response.message);
+            console.log(rentals);
+            rentals?.forEach((rental) => {
+              if (rental && rental.rentDate && rental.returnDate) {
+                this.rentalService.add(rental).subscribe((response) => {
+                  if (response.success) {
+                    this.toastrService.success(response.message);
+                  }
+                });
+              } else {
+                this.toastrService.error('There is no rent and return date');
+              }
+            });
+          } else {
+            this.toastrService.error(response.message);
           }
-        }
-      });
-    }
+        });
+      }
   }
 
+  if(this.payWithSaveCard==true){
+    console.log(this.customerId);
+    this.paymentService.pay(this.customerId).subscribe((response) => {
+      if (response.success) {
+        this.toastrService.success(response.message);
+        console.log(rentals);
+        rentals?.forEach((rental) => {
+          if (rental && rental.rentDate && rental.returnDate) {
+            this.rentalService.add(rental).subscribe((response) => {
+              if (response.success) {
+                this.toastrService.success(response.message);
+              }
+            });
+          } else {
+            this.toastrService.error('There is no rent and return date');
+          }
+        });
+      } else {
+        this.toastrService.error(response.message);
+      }
+    });
+  }
+  }
   // askForSave(payment:Payment){
   //   this.paymentService.checkIfThisCardIsAlreadySavedForThisCustomer(payment).subscribe(response=>{
   //     if (confirm(SaveYourCreditCard)) this.paymentService.add(payment)
   //   })
   // }
+
+  getAllByCustomerId(customerId:number){
+    this.paymentService.getAllByCustomerId(customerId).subscribe(response=>{
+      this.savedPayments = response.data;
+    })
+  }
+
+  onCheckboxChange(check: boolean) {
+    let rentals = this.rentalService.getRental();
+    if(rentals && rentals.length>0){
+      this.customerId = rentals[0].customerId;
+    }
+    if (check) {
+      this.getAllByCustomerId(this.customerId);
+    }
+  }
 }

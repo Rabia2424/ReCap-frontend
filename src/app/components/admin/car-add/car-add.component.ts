@@ -68,14 +68,6 @@ export class CarAddComponent implements OnInit{
       this.carService.add(carModel).subscribe(data=>{
         this.toastrService.success(data.message);
         this.backToCarList();
-      },responseError=>{
-        console.log(responseError);
-        if(responseError.error.Errors.length >0){
-          console.log(responseError);
-          for(let i = 0;i < responseError.error.Errors.length;i++){
-            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Validation Exception!");
-          }
-        }
       })
     }else{
       this.toastrService.error("Form is not valid","Careful");

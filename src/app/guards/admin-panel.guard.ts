@@ -13,12 +13,14 @@ export const adminPanelGuard: CanActivateFn = (route, state) => {
   if(token){
     const decodedToken: any = jwtDecode(token);
     const roles:string[] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    console.log(roles);
     const expectedRoles: string[] = route.data['expectedRoles'] || [];
 
     // if(roles && roles.includes('car.add')){
     //   return true;
     // }
-    if(roles && roles.some(role => expectedRoles.includes(role))){
+    const rolesArray = Array.isArray(roles)? roles:[roles];
+    if(rolesArray && rolesArray.some(role => expectedRoles.includes(role))){
       return true;
     }
     toastrService.info("Authorization denied!");

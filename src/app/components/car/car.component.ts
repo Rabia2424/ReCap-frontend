@@ -15,13 +15,15 @@ import { BrandComponent } from '../brand/brand.component';
 import { ColorComponent } from '../color/color.component';
 import { CustomerComponent } from '../customer/customer.component';
 import { RentalComponent } from '../rental/rental.component';
+import { PriceFilterComponent } from '../price-filter/price-filter.component';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [CommonModule, 
-    HttpClientModule, 
+  imports: [CommonModule,
+    HttpClientModule,
     RouterModule,
     BrandComponent,
     ColorComponent,
@@ -30,6 +32,7 @@ import { RentalComponent } from '../rental/rental.component';
     FormsModule,
     FilterPipe,
     CarFilterComponent,
+    PriceFilterComponent
    ],
     providers: [FilterPipe],
   templateUrl: './car.component.html',
@@ -44,7 +47,7 @@ export class CarComponent implements OnInit {
 
   filterText="";
   //filteredCarDetails:CarDetail[]=[];
- 
+
 
   // carResponseModel: CarResponseModel = {
   //   data:this.cars,
@@ -55,17 +58,22 @@ export class CarComponent implements OnInit {
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
+    private authService:AuthService,
     private toastrService: ToastrService,
     private filterPipe:FilterPipe) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
+      const minPrice = params['minPrice'] ? +params['minPrice'] : null;
+      const maxPrice = params['maxPrice'] ? +params['maxPrice'] : null;
       if(params["brandId"] && params["colorId"]){
         this.getCarByBrandAndColor(params["brandId"],params["colorId"]);
       } else if (params['brandId']) {
         this.getCarsByBrand(params['brandId']);
       } else if (params["colorId"]) {
         this.getCarsByColor(params["colorId"]);
+      } else if(minPrice || maxPrice){
+        this.getCarsByMinandMaxPrice(minPrice, maxPrice);
       } else {
         this.getCars();
       }
@@ -78,6 +86,13 @@ export class CarComponent implements OnInit {
       //this.filteredCarDetails = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  getCarsByMinandMaxPrice(minPrice:number|null,maxPrice:number|null){
+    this.carService.getCarsByMinandMaxPrice(minPrice,maxPrice).subscribe(response=>{
+      this.cardetails = response.data;
+      this.dataLoaded=true;
+    })
   }
 
   getCarsByBrand(brandId: number) {
@@ -112,8 +127,10 @@ export class CarComponent implements OnInit {
   }
 
   setCurrentCarDetail(cardetail:CarDetail){
-    this.currentCarDetail = cardetail;
-    this.toastrService.info("You redirect to car detail page.","")
+    if(this.authService.isAuthenticated()){
+      this.currentCarDetail = cardetail;
+      this.toastrService.info("You redirect to car detail page.","")
+    }
   }
 
   // onSearch():void{

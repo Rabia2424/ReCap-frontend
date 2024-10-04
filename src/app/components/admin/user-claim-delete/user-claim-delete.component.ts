@@ -91,7 +91,6 @@ export class UserClaimDeleteComponent implements OnInit{
           this.userClaim = response.data.find(u=>u.userId == userClaimModel.userId && u.operationClaimId == userClaimModel.operationClaimId);
         }
 
-
       if(this.userClaim){
         userClaimModel.id = this.userClaim.id;
       }

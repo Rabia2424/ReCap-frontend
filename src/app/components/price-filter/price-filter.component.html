@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col select-part">
+      <label class="label">Min Price</label>
+    <div class="custom-select">
+      <input [(ngModel)]="minPrice" type="number">
+    </div>
+  </div>
+  <div class="col">
+      <label class="label">Max Price</label>
+    <div class="custom-select custom-select-2">
+      <input [(ngModel)]="maxPrice" type="number">
+    </div>
+  </div>
+  <div class="col button-filter">
+    <button type="submit" [class]="changeButtonClass()" [routerLink]="changeRouteLink()">Filter</button>
+    <button type="submit" (click)="clearFilter()" class="btn btn-custom" routerLink="/cars" >Clear</button>
+  </div>
+</div>
+
